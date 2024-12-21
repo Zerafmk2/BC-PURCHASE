@@ -109,64 +109,12 @@ def submit_form():
             page.goto("https://bctest.dayliff.com/BC160/?company=KENYA&bookmark=29%3busMAAAJ7%2f1AAUgAwADAAMAAyADUAMwA3&page=50152&dc=0")
             time.sleep(5)
 
-            frame.get_by_role("menuitem", name="New").click()
-            time.sleep(5)
-            frame.get_by_label("Requisition Type, (Blank)").select_option("1")
-            time.sleep(5)
 
-            frame.get_by_label("General, Show more").click()
-            frame.get_by_role("button", name="Toggle FactBox").click()
-            time.sleep(5)
 
-            frame.get_by_role("textbox", name="Description, (Blank)").click()
 
-            header = frame.locator("div[role='heading'][class*='title---'][aria-level='2']").first
-
-            # Wait for up to 10 seconds for the header to appear
-            header.wait_for(timeout=10000)
-
-            # Extract the text content of the header
-            text_content = header.text_content()
-            print(f"Text content of the header: {text_content}")
-
-            # Use regex to find the pattern "RFQ" followed by digits (e.g., RFQ007686)
-            match = re.search(r"RFQ\d+", text_content)
-    
-            if match:
-                RFQ_no = match.group(0)  # Extract the RFQ number (e.g., RFQ007686)
-                print(f"Extracted RFQ number: {RFQ_no}")
-        
-                # Save the RFQ number to JSON with the key "RFQ_no"
-                extracted_data = {"RFQ_no": RFQ_no}
-                save_extracted_data(extracted_data)
-                print(f"RFQ number extracted and saved: {RFQ_no}")
-            else:
-                print("RFQ number not found.")
-                RFQ_no = None
-
-            frame.get_by_role("textbox", name="Description, (Blank)").click()
-            frame.get_by_role("textbox", name="Description, (Blank)").fill("testing rfq proceess\n")
-            time.sleep(2)
-
-            frame.get_by_role("combobox", name="Description, (Blank)").click()
-            frame.get_by_role("combobox", name="Description, (Blank)").fill("mousepad special")
-            frame.get_by_role("combobox", name="Description, (Blank)").press("Enter")
-            time.sleep(2)
-
-            frame.get_by_label("Quantity,", exact=True).fill("1")
-            frame.get_by_label("Quantity,", exact=True).press("Enter")
-
-            frame.get_by_role("menuitem", name="Process").click()
-            frame.get_by_role("menuitem", name="Send to Procurement").click()
-            time.sleep(5)
-
-            take_screenshot(page, "RFQ_created")
-            frame.get_by_role("button", name="Yes").click()
-            time.sleep(5)
-            
-            print("RFQ created successfully!")
 
         except Exception as e:
+            
             error_screenshot = take_screenshot(page, "Error")
             print(f"An error occurred: {str(e)}. Screenshot saved at {error_screenshot}.")
 
