@@ -148,13 +148,31 @@ def submit_form():
             frame.get_by_role("textbox", name="Description, (Blank)").fill("testing rfq proceess\n")
             time.sleep(2)
 
-            frame.get_by_role("combobox", name="Description, (Blank)").click()
-            frame.get_by_role("combobox", name="Description, (Blank)").fill("mousepad special")
-            frame.get_by_role("combobox", name="Description, (Blank)").press("Enter")
+            frame.get_by_role("row", name="  Location Code, 22010 0 0.").get_by_label("Type, (Blank)", exact=True).click()
+            frame.get_by_role("row", name="  Location Code, 22010 0 0.").get_by_label("Type, (Blank)", exact=True).select_option("20")
+            time.sleep(2)
+
+            frame.get_by_role("combobox", name="No., (Blank)", exact=True).click()
+            frame.get_by_role("combobox", name="No., (Blank)", exact=True).fill("20928")
+            time.sleep(2)
+
+
+
+            frame.get_by_label("Comments, (Blank)").click()
             time.sleep(2)
 
             frame.get_by_label("Quantity,", exact=True).fill("1")
             frame.get_by_label("Quantity,", exact=True).press("Enter")
+            time.sleep(2)
+            frame.get_by_label("Source Doc Type,", exact=True).select_option("4")
+
+            frame.get_by_role("combobox", name="Source No., (Blank)").click()
+            frame.get_by_role("combobox", name="Source No., (Blank)").fill("J066872")
+            frame.get_by_label("Comments, (Blank)").click()
+
+            frame.get_by_label("Source Line No.,", exact=True).click()
+            frame.get_by_label("Source Line No.,", exact=True).fill("1010")
+            time.sleep(2)
 
             frame.get_by_role("menuitem", name="Process").click()
             frame.get_by_role("menuitem", name="Send to Procurement").click()

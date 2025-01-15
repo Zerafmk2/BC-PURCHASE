@@ -88,26 +88,19 @@ def submit_form():
             frame.get_by_role("button", name=f"No., {RFQ_no}").click()
             
             frame.get_by_label("General, Show more").click()
-
-            frame.get_by_role("button", name="Doc. Links File Drop").click()
-            frame.get_by_role("menuitem", name="Upload").locator("div").first.click() 
-            frame.get_by_role("textbox").click()
-
-            #time for human to select file
-            time.sleep(100)
-
-            frame.get_by_role("menuitem", name="Process").click()
-            frame.get_by_role("menuitem", name="Complete Action").click()
-
-            frame.get_by_role("button", name="Yes").click()
-
-            take_screenshot(page, f"page quated_{RFQ_no}")  
-            time.sleep(10)
+            frame.get_by_role("button", name="Toggle FactBox").click()
             
-            print(f"Navigated to RFQ page using RFQ_no: {RFQ_no}")
+            frame.get_by_role("menuitem", name="Request Approval").click()
+            frame.get_by_role("menuitem", name="Send Approval Request").click()
+            
+            frame.get_by_label("Look up value").click()
+            frame.get_by_label("User ID, ICTTEST").click()
+            frame.get_by_role("button", name="OK").click()
+            time.sleep(5)
+
             take_screenshot(page, f"RFQ_page_{RFQ_no}")
 
-            print(f"RFQ action performed successfully: {RFQ_no}")
+            print(f"send RFQ approval request performed successfully: {RFQ_no}")
 
         except Exception as e:
             error_screenshot = take_screenshot(page, "Error")
